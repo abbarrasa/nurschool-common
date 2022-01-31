@@ -34,7 +34,7 @@ prepare: ## Runs commands
 
 # Commands
 composer-install: ## Installs composer dependencies
-	U_ID=${UID} docker exec --user ${UID} -IT ${DOCKER_CONTAINER} composer install --no-scripts --no-interaction --optimize-autoloader
+	U_ID=${UID} docker exec --user ${UID} -it ${DOCKER_CONTAINER} composer install --no-scripts --no-interaction --optimize-autoloader
 
 ssh: ## ssh's into the container
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_CONTAINER} bash

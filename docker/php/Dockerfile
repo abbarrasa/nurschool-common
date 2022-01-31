@@ -10,9 +10,9 @@ RUN echo "export COLUMNS=300" >> /home/appuser/.bashrc
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 RUN apt-get update \
-    && apt-get install -y git wget zip vim \
+    && apt-get install -y git acl openssl openssh-client wget zip vim libssh-dev \
     && apt-get install -y libzip-dev \
-    && docker-php-ext-install zip
+    && docker-php-ext-install zip    
 
 RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 RUN composer self-update
