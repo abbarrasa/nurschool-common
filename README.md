@@ -1,2 +1,2 @@
 # nurschool-common
-Common skeleton for Nurschool project
+Common basic classes to build Nurschool application

@@ -1,0 +1,17 @@
+{
+    "name": "nurschool/nurschool-common",
+    "description": "Common basic classes to build Nurschool application",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/abbarrasa/nurschool",
+    "require": {
+        "php": ">=8.0.2",
+        "ramsey/uuid": "^4.2",
+        "doctrine/orm": "^2.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nurschool\\Common\\": "src/"
+        }
+    }
+}
