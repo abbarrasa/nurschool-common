@@ -20,6 +20,6 @@ RUN composer self-update
 RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.2.1/php-cs-fixer.phar -O php-cs-fixer
 RUN chmod a+x php-cs-fixer
 
-RUN mkdir -p /appdata/www
+RUN mkdir -p /appdata/lib/common
 
-WORKDIR /appdata/www
+WORKDIR /appdata/lib/common

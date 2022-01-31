@@ -11,3 +11,4 @@ services:
       PHP_IDE_CONFIG: serverName=Docker
     volumes:
       - ./:/appdata/lib/common
+      - ~/.ssh/id_rsa:/home/appuser/.ssh/id_rsa
