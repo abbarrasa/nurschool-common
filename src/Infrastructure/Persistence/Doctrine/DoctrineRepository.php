@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Nurschool\Platform\Shared\Infrastructure\Persistence\Doctrine;
+namespace Nurschool\Common\Infrastructure\Persistence\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
