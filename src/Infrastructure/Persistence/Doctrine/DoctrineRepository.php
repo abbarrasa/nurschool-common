@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace Nurschool\Common\Infrastructure\Persistence\Doctrine;
 
-use Doctrine\Common\Proxy\Exception\UnexpectedValueException;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
 use Nurschool\Common\Domain\AggregateRoot;
-use Nurschool\Common\Domain\Model\Repository;
 use Nurschool\Common\Infrastructure\Persistence\Exception\UnexpectedClassException;
 
-abstract class DoctrineRepository implements Repository
+abstract class DoctrineRepository
 {
     private ManagerRegistry $managerRegistry;
     protected Connection $connection;
@@ -36,23 +34,23 @@ abstract class DoctrineRepository implements Repository
 
     abstract public function entityClass(): string;
 
-    public function save(AggregateRoot $entity, bool $andFlush = true): void
+    public function save(AggregateRoot $object, bool $andFlush = true): void
     {
-        $this->checkClass($entity);
-        $this->getEntityManager()->persist($entity);
+        $this->checkClass($object);
+        $this->getEntityManager()->persist($object);
 
         if ($andFlush) {
-            $this->getEntityManager()->flush($entity);
+            $this->getEntityManager()->flush($object);
         }
     }
 
-    public function remove(AggregateRoot $entity, bool $andFlush = true): void
+    public function remove(AggregateRoot $object, bool $andFlush = true): void
     {
-        $this->checkClass($entity);
-        $this->getEntityManager()->remove($entity);
+        $this->checkClass($object);
+        $this->getEntityManager()->remove($object);
 
         if ($andFlush) {
-            $this->getEntityManager()->flush($entity);
+            $this->getEntityManager()->flush($object);
         }
     }
 
@@ -66,10 +64,10 @@ abstract class DoctrineRepository implements Repository
         return $this->managerRegistry->getManager();        
     }
 
-    private function checkClass(AggregateRoot $entity): bool
+    private function checkClass(AggregateRoot $object): bool
     {
-        if (get_class($entity) !== $this->entityClass()) {
-            throw UnexpectedClassException::create($entity, $this->entityClass());
+        if (get_class($object) !== $this->entityClass()) {
+            throw UnexpectedClassException::create($object, $this->entityClass());
         }
 
         return true;
