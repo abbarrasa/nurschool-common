@@ -13,12 +13,15 @@ declare(strict_types=1);
 
 namespace Nurschool\Common\Infrastructure\Persistence\Doctrine;
 
+use Doctrine\Common\Proxy\Exception\UnexpectedValueException;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
 use Nurschool\Common\Domain\AggregateRoot;
+use Nurschool\Common\Domain\Model\Repository;
+use Nurschool\Common\Infrastructure\Persistence\Exception\UnexpectedClassException;
 
-abstract class DoctrineRepository
+abstract class DoctrineRepository implements Repository
 {
     private ManagerRegistry $managerRegistry;
     protected Connection $connection;
@@ -33,16 +36,24 @@ abstract class DoctrineRepository
 
     abstract public function entityClass(): string;
 
-    protected function persist(AggregateRoot $entity): void
+    public function save(AggregateRoot $entity, bool $andFlush = true): void
     {
+        $this->checkClass($entity);
         $this->getEntityManager()->persist($entity);
-        $this->getEntityManager()->flush($entity);
+
+        if ($andFlush) {
+            $this->getEntityManager()->flush($entity);
+        }
     }
 
-    protected function remove(AggregateRoot $entity): void
+    public function remove(AggregateRoot $entity, bool $andFlush = true): void
     {
+        $this->checkClass($entity);
         $this->getEntityManager()->remove($entity);
-        $this->getEntityManager()->flush($entity);
+
+        if ($andFlush) {
+            $this->getEntityManager()->flush($entity);
+        }
     }
 
     /**
@@ -53,5 +64,14 @@ abstract class DoctrineRepository
     private function getEntityManager()
     {
         return $this->managerRegistry->getManager();        
+    }
+
+    private function checkClass(AggregateRoot $entity): bool
+    {
+        if (get_class($entity) !== $this->entityClass()) {
+            throw UnexpectedClassException::create($entity, $this->entityClass());
+        }
+
+        return true;
     }
 }
