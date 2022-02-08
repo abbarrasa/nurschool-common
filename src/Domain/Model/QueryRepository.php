@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Nurschool\Common\Application\Query;
+namespace Nurschool\Common\Domain\Model;
 
-interface Response
+interface QueryRepository
 {
 
 }

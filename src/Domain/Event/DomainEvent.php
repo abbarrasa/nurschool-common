@@ -13,23 +13,21 @@ declare(strict_types=1);
 
 namespace Nurschool\Common\Domain\Event;
 
-
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Nurschool\Common\Domain\ValueObject\Uuid;
 
 abstract class DomainEvent
 {
-    private UuidInterface $eventId;
+    private Uuid $eventId;
     private string $aggregateId;
     protected array $body;
 
     /** @var \DateTime|\DateTimeInterface */
     private $occurredOn;
 
-    public function __construct(string $aggregateId, array $body = [], ?UuidInterface $eventId = null, ?\DateTimeInterface $occurredOn = null)
+    public function __construct(string $aggregateId, array $body = [], ?Uuid $eventId = null, ?\DateTimeInterface $occurredOn = null)
     {
         $this->aggregateId = $aggregateId;
-        $this->eventId = $eventId ?: Uuid::uuid4();
+        $this->eventId = $eventId ?: Uuid::random();
         $this->body = $body;
         $this->occurredOn = $occurredOn ?: new \DateTime();
     }
@@ -50,7 +48,7 @@ abstract class DomainEvent
         return $this->aggregateId;
     }
 
-    public function eventId(): UuidInterface
+    public function eventId(): Uuid
     {
         return $this->eventId;
     }

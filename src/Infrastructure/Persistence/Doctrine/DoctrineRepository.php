@@ -16,8 +16,6 @@ namespace Nurschool\Common\Infrastructure\Persistence\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
-use Nurschool\Common\Domain\AggregateRoot;
-use Nurschool\Common\Infrastructure\Persistence\Exception\UnexpectedClassException;
 
 abstract class DoctrineRepository
 {
@@ -34,42 +32,13 @@ abstract class DoctrineRepository
 
     abstract public function entityClass(): string;
 
-    public function save(AggregateRoot $object, bool $andFlush = true): void
-    {
-        $this->checkClass($object);
-        $this->getEntityManager()->persist($object);
-
-        if ($andFlush) {
-            $this->getEntityManager()->flush($object);
-        }
-    }
-
-    public function remove(AggregateRoot $object, bool $andFlush = true): void
-    {
-        $this->checkClass($object);
-        $this->getEntityManager()->remove($object);
-
-        if ($andFlush) {
-            $this->getEntityManager()->flush($object);
-        }
-    }
-
     /**
      * Get entity manager
      *
      * @return ObjectManager|EntityManager
      */
-    private function getEntityManager()
+    protected function getEntityManager()
     {
         return $this->managerRegistry->getManager();        
-    }
-
-    private function checkClass(AggregateRoot $object): bool
-    {
-        if (get_class($object) !== $this->entityClass()) {
-            throw UnexpectedClassException::create($object, $this->entityClass());
-        }
-
-        return true;
     }
 }

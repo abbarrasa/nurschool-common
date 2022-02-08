@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * This file is part of the Nurschool project.
  *
@@ -16,7 +15,7 @@ namespace Nurschool\Common\Domain\Model;
 
 use Nurschool\Common\Domain\AggregateRoot;
 
-interface Repository
+interface StoreRepository
 {
     public function save(AggregateRoot $object, bool $andFlush = true): void;
 

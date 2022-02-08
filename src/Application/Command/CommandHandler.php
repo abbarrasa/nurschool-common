@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Nurschool\Common\Application\Command;
 
-
 interface CommandHandler
 {
 
