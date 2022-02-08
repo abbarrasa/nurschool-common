@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Nurschool\Common\Application\Command;
+namespace Nurschool\Common\Application\Command\Exception;
 
 use Nurschool\Common\Application\Command\Command;
 
