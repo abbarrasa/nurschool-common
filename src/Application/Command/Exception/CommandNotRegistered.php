@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Nurschool\Common\Infrastructure\Bus\Command;
+namespace Nurschool\Common\Application\Command;
 
 use Nurschool\Common\Application\Command\Command;
 
-final class CommandNotRegisteredException extends \RuntimeException
+final class CommandNotRegistered extends \RuntimeException
 {
     public function __construct(Command $command)
     {
