@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Nurschool\Common\Domain\ValueObject;
 
+use Nurschool\Common\Domain\Exception\InvalidUuid;
+
 final class Uuid
 {
     private string $value;
@@ -36,7 +38,7 @@ final class Uuid
     private function ensureIsValidUuid(string $id): void
     {
         if (!\Ramsey\Uuid\Uuid::isValid($id)) {
-            throw new \InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $id));
+            throw InvalidUuid::createFromId($id);
         }
     }    
 }
