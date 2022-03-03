@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Nurschool\Common\Infrastructure\Persistence\Doctrine\Repository;
 
 use Nurschool\Common\Domain\AggregateRoot;
-use Nurschool\Common\Domain\Model\StoreRepository;
+use Nurschool\Common\Domain\Repository\StoreRepository;
 use Nurschool\Common\Infrastructure\Persistence\Exception\UnexpectedClassException;
 
 abstract class StoreDoctrineRepository extends DoctrineRepository implements StoreRepository
