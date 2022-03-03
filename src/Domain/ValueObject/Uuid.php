@@ -19,7 +19,7 @@ final class Uuid
 {
     private string $value;
 
-    private function __construct(string $value)
+    public function __construct(string $value)
     {
         $this->ensureIsValidUuid($value);
         $this->value = $value;
