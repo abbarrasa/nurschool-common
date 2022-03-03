@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Nurschool\Common\Domain\Model;
+namespace Nurschool\Common\Domain\Repository;
 
 interface QueryRepository
 {
