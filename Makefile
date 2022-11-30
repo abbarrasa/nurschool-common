@@ -17,7 +17,7 @@ help: # Shows this help message
 	@echo 'targets:'
 	@egrep '^(.+)\:\ ##\ (.+)' ${MAKEFILE_LIST} | column -t -c 2 -s ':#'
 
-run: ## Starts the containers
+start: ## Starts the containers
 	U_ID=${UID} docker-compose up -d
 
 stop: ## Stops the containers
