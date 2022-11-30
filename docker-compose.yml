@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  nurschool-common-php:
+    container_name: nurschool-common-php
+    build:
+      context: ./docker/php
+      args:
+        UID: $U_ID
+    environment:
+      PHP_IDE_CONFIG: serverName=Docker
+    volumes:
+      - ./:/appdata/lib/common
+      - ~/.ssh/id_rsa:/home/appuser/.ssh/id_rsa
